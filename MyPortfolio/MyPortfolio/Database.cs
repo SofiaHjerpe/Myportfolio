@@ -20,5 +20,12 @@ namespace MyPortfolio
                 .Find(p => true)
                 .ToListAsync();
         }
+        
+        public async Task SaveProject (Project project)
+        {
+        await    GetDb().GetCollection<Project>("Projects")
+                .InsertOneAsync(project);
+        }
+        
     }
 }

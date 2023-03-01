@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyPortfolio.Models;
 
 namespace MyPortfolio.Controllers
 {
@@ -8,8 +9,27 @@ namespace MyPortfolio.Controllers
         {
             Database db = new Database();
             var Projects = await db.GetProjectsAsync();
-            
+
             return View(Projects);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        
+        [HttpPost]
+        public async Task<IActionResult> Create(Project project)
+        {
+            Database db = new Database();
+
+            await db.SaveProject(project);
+
+            return Redirect("/Project");
+        }
+        
     }
 }
+
+
